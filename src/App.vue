@@ -23,6 +23,16 @@
       </nav>
     </header>
     <div class="container">
+      <duc-component
+        :title.sync="doc.title"
+      >
+        <template
+            slot-scope="slotContent"
+        >
+          <div :style="{ color: 'red' }">{{ slotContent }}</div>
+        </template>
+      </duc-component>
+
       <aside class="aside">
         <router-view name="sidebar" />
       </aside>
@@ -37,6 +47,8 @@
 
 <script>
 
+import duc from './components/ducComponent';
+
 export default {
   name: 'app',
   computed: {
@@ -44,6 +56,16 @@ export default {
       return this.$store.state.robot.cart.length || 0;
     },
   },
+  components: {
+    [duc.name]: duc,
+  },
+  data() {
+    return {
+      doc: {
+        title: 'hothuyduc'
+      }
+    }
+  }
 };
 </script>
 
